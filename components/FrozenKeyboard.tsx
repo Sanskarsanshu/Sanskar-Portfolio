@@ -300,10 +300,33 @@ const PRESS_DEPTH = 0.15;
 // the first real interaction so every subsequent hover plays immediately.
 let audioCtx: AudioContext | null = null;
 let audioUnlockInstalled = false;
+
+// Pre-fetch the arrays immediately so network delay is eliminated
+const KEY_SOUND_URLS = [
+  "/sounds/switch_press.mp3",
+  "/sounds/switch_release.mp3",
+] as const;
+let preloadedFetches: Promise<ArrayBuffer>[] = [];
+if (typeof window !== "undefined") {
+  preloadedFetches = KEY_SOUND_URLS.map((url) =>
+    fetch(url).then((r) => r.arrayBuffer())
+  );
+}
+
 function installAudioUnlock() {
   if (audioUnlockInstalled || typeof window === "undefined") return;
   audioUnlockInstalled = true;
   const unlock = () => {
+    if (!audioCtx) {
+      const Ctor =
+        window.AudioContext ||
+        (window as unknown as { webkitAudioContext: typeof AudioContext })
+          .webkitAudioContext;
+      if (Ctor) {
+        audioCtx = new Ctor();
+        loadKeySounds(audioCtx);
+      }
+    }
     if (audioCtx && audioCtx.state === "suspended") {
       audioCtx.resume().catch(() => {});
     }
@@ -315,22 +338,19 @@ function installAudioUnlock() {
   window.addEventListener("keydown", unlock, { once: false });
   window.addEventListener("touchstart", unlock, { once: false });
 }
-// Two pre-decoded samples (press / release) — pick one at random on each
-// hover for variety. Fetched + decoded once on first play; subsequent hovers
-// just spawn a fresh BufferSource (cheap, can overlap).
-const KEY_SOUND_URLS = [
-  "/sounds/switch_press.mp3",
-  "/sounds/switch_release.mp3",
-] as const;
+
+if (typeof window !== "undefined") {
+  installAudioUnlock();
+}
+
 const keySoundBuffers: (AudioBuffer | null)[] = [null, null];
 let keySoundsLoading: Promise<void> | null = null;
 function loadKeySounds(ctx: AudioContext): Promise<void> {
   if (keySoundsLoading) return keySoundsLoading;
   keySoundsLoading = Promise.all(
-    KEY_SOUND_URLS.map((url, i) =>
-      fetch(url)
-        .then((r) => r.arrayBuffer())
-        .then((buf) => ctx.decodeAudioData(buf))
+    preloadedFetches.map((fetchPromise, i) =>
+      fetchPromise
+        .then((buf) => ctx.decodeAudioData(buf.slice(0)))
         .then((decoded) => {
           keySoundBuffers[i] = decoded;
         })
@@ -429,14 +449,11 @@ function Keycap({
   // Each key gets its own random frequency + phase, stable across re-renders
   // so every keycap's random bob feels independent (no synchronised wave).
   // Sampled once at mount.
-  const randomBob = useMemo(
-    () => ({
-      freq: 0.6 + Math.random() * 0.6, // 0.6..1.2 Hz-ish
-      phase: Math.random() * Math.PI * 2,
-      threshold: 0.45 + Math.random() * 0.2, // 0.45..0.65 — higher = rarer pop
-    }),
-    []
-  );
+  const [randomBob] = useState(() => ({
+    freq: 0.6 + Math.random() * 0.6, // 0.6..1.2 Hz-ish
+    phase: Math.random() * Math.PI * 2,
+    threshold: 0.45 + Math.random() * 0.2, // 0.45..0.65 — higher = rarer pop
+  }));
 
   const iconTexture = useMemo(
     () => makeIconTexture(icon.path, `#${icon.hex}`),

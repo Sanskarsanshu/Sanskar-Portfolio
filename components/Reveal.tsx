@@ -83,6 +83,7 @@ export default function Reveal({
   return createElement(
     Tag,
     {
+      // eslint-disable-next-line react-hooks/refs
       ref,
       className: `reveal ${className}`.trim(),
       style,

@@ -93,15 +93,6 @@ export default function Home() {
                 </svg>
                 <span>GitHub — Sanskarsanshu</span>
               </a>
-              <button
-                type="button"
-                onClick={() => setTerminalOpen(true)}
-                data-cursor="hover"
-                className="frost-btn !py-1.5 !px-3 !text-xs font-mono font-bold hover:text-white hover:border-ice-300"
-                aria-label="Open Developer Terminal"
-              >
-                &gt;_
-              </button>
             </span>
           </div>
         </header>
@@ -605,6 +596,23 @@ export default function Home() {
           project={activeProject}
           onBack={() => setActiveProject(null)}
         />
+
+        {!terminalOpen && (
+          <button
+            type="button"
+            onClick={() => setTerminalOpen(true)}
+            className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-[48px] h-[48px] md:w-[64px] md:h-[64px] z-50 cursor-pointer hover:scale-105 transition-transform bg-transparent border-0"
+            aria-label="Open Terminal"
+          >
+            <img 
+              src="/terminal_icon.png" 
+              alt="Open Terminal" 
+              width={256} 
+              height={256} 
+              className="w-full h-full object-contain drop-shadow-2xl"
+            />
+          </button>
+        )}
 
         <TerminalOverlay
           isOpen={terminalOpen}

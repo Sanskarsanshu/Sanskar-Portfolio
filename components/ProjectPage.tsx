@@ -29,6 +29,7 @@ export default function ProjectPage({ project, onBack }: Props) {
 
   // Reset to first slide whenever a new project opens
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (open) setCarouselIndex(0);
   }, [open, project?.num]);
 
