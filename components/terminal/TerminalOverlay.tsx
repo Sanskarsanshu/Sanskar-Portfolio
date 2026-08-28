@@ -94,6 +94,34 @@ export default function TerminalOverlay({ isOpen, onClose, onOpenProject }: Term
     }
   }, [history, isMinimized]);
 
+  // Completely reset the terminal session when closed
+  useEffect(() => {
+    if (!isOpen) {
+      // Wait for the exit animation to finish before wiping state
+      const timer = setTimeout(() => {
+        setHistory([
+          {
+            id: Date.now(),
+            type: "output",
+            content: "Welcome to Sanskar's developer console.\nType \"help\" to see available commands."
+          }
+        ]);
+        setInput("");
+        setCwd("~");
+        setCommandHistory([]);
+        setHistoryIndex(-1);
+        setIsFullscreen(false);
+        setIsMinimized(false);
+        
+        // Reset physical drag coordinates
+        x.set(0);
+        y.set(0);
+        savedPos.current = { x: 0, y: 0 };
+      }, 300);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, x, y]);
   const handleOutput = (output: CommandOutput) => {
     if (typeof output === "string") {
       setHistory(prev => [...prev, { id: Date.now() + Math.random(), type: "output", content: output }]);
