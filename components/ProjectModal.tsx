@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useLenis } from "lenis/react";
 import { useLanguage } from "@/components/LanguageProvider";
-import Carousel from "@/components/Carousel";
+import { HeroCarousel } from "@/components/ui/hero-carousel";
 import type { ProjectDetail } from "@/lib/projects";
 
 type Props = {
@@ -12,9 +12,7 @@ type Props = {
 };
 
 // Fullscreen modal that details a project. Closes on ESC, click outside,
-// and via the explicit close button. Stops Lenis while open (overflow:hidden
-// alone isn't enough — Lenis listens to wheel events) and restores it on
-// close.
+// and via the explicit close button. Uses HeroCarousel for the media section.
 export default function ProjectModal({ project, onClose }: Props) {
   const { t } = useLanguage();
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -31,9 +29,7 @@ export default function ProjectModal({ project, onClose }: Props) {
     return () => window.removeEventListener("keydown", onKey);
   }, [open, onClose]);
 
-  // Freeze the page while the modal is open: stop Lenis so wheel/touch
-  // events don't leak through, plus overflow:hidden on html/body as a
-  // belt-and-braces fallback.
+  // Freeze the page while the modal is open.
   useEffect(() => {
     if (!open) return;
     lenis?.stop();
@@ -48,8 +44,7 @@ export default function ProjectModal({ project, onClose }: Props) {
     };
   }, [open, lenis]);
 
-  // Move focus into the modal when it opens so ESC captures and keyboard
-  // users don't have to tab through the whole page first.
+  // Move focus into the modal when it opens.
   useEffect(() => {
     if (open && dialogRef.current) {
       dialogRef.current.focus();
@@ -61,7 +56,6 @@ export default function ProjectModal({ project, onClose }: Props) {
       className={`project-modal ${open ? "project-modal--open" : ""}`}
       aria-hidden={!open}
       onClick={(e) => {
-        // Click on the backdrop (not inside the dialog) closes.
         if (e.target === e.currentTarget) onClose();
       }}
     >
@@ -97,10 +91,35 @@ export default function ProjectModal({ project, onClose }: Props) {
               </svg>
             </button>
 
+            {/* ── Hero Carousel Media ── */}
             <div className="project-modal__media">
-              <Carousel media={project.media} projectNum={project.num} />
+              {project.media.length > 0 ? (
+                <HeroCarousel
+                  items={project.media}
+                  className="h-full w-full"
+                  autoplay
+                  autoplayDelay={4500}
+                />
+              ) : (
+                /* Elegant placeholder when no screenshots yet */
+                <div
+                  className="h-full w-full flex flex-col items-center justify-center gap-4"
+                  style={{
+                    background: `linear-gradient(135deg, ${project.accent ?? "#183f5e"}22, #0a0f1a)`,
+                    borderRight: "1px solid rgba(255,255,255,0.06)",
+                  }}
+                >
+                  <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-ice-400">
+                    {project.num} · Screenshots Coming Soon
+                  </span>
+                  <p className="text-5xl font-bold text-ice-50/10 tracking-tighter">
+                    {project.name}
+                  </p>
+                </div>
+              )}
             </div>
 
+            {/* ── Project Details ── */}
             <div className="project-modal__body">
               <p className="font-mono text-xs text-ice-400 uppercase tracking-[0.25em] mb-2">
                 {project.num} · {t("projects.kicker")}
@@ -131,16 +150,7 @@ export default function ProjectModal({ project, onClose }: Props) {
                       data-magnetic
                       className="frost-btn frost-btn--primary"
                     >
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="16"
-                        height="16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        aria-hidden
-                      >
+                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
                         <path d="M7 17L17 7M8 7h9v9" />
                       </svg>
                       {t("projects.openSite")}
@@ -155,13 +165,7 @@ export default function ProjectModal({ project, onClose }: Props) {
                       data-magnetic
                       className="frost-btn"
                     >
-                      <svg
-                        viewBox="0 0 16 16"
-                        width="14"
-                        height="14"
-                        fill="currentColor"
-                        aria-hidden
-                      >
+                      <svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden>
                         <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
                       </svg>
                       {t("projects.viewCode")}

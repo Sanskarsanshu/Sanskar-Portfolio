@@ -7,7 +7,7 @@ import Reveal from "@/components/Reveal";
 import SectionNav from "@/components/SectionNav";
 import CopyEmail from "@/components/CopyEmail";
 import SeasonPicker from "@/components/SeasonPicker";
-import ProjectModal from "@/components/ProjectModal";
+import ProjectPage from "@/components/ProjectPage";
 import { useLanguage } from "@/components/LanguageProvider";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { SKILLS_FLAT } from "@/lib/skills";
@@ -479,22 +479,29 @@ export default function Home() {
                         : "flex pointer-events-auto"
                     }
                   >
+                    {/* Premium cinematic "View Project" CTA */}
                     <button
                       type="button"
                       onClick={() => setActiveProject(p)}
                       data-cursor="hover"
                       data-magnetic
-                      className="frost-btn"
+                      className="group relative inline-flex items-center gap-3 overflow-hidden border border-ice-600/50 bg-transparent px-6 py-3 text-sm font-mono uppercase tracking-[0.15em] text-ice-200 transition-all duration-500 hover:border-ice-300/80 hover:text-white"
                     >
-                      {t("projects.viewMore")}
+                      {/* Sliding fill on hover */}
+                      <span className="absolute inset-0 -translate-x-full bg-white/6 transition-transform duration-500 ease-out group-hover:translate-x-0" />
+                      {/* Project number watermark */}
+                      <span className="relative font-mono text-[10px] text-ice-500 tracking-widest group-hover:text-ice-300 transition-colors">{p.num}</span>
+                      <span className="relative h-px w-8 bg-ice-600 group-hover:w-12 group-hover:bg-ice-300 transition-all duration-500" />
+                      <span className="relative">{t("projects.viewMore")}</span>
                       <svg
                         viewBox="0 0 24 24"
-                        width="14"
-                        height="14"
+                        width="13"
+                        height="13"
                         fill="none"
                         stroke="currentColor"
-                        strokeWidth="2"
+                        strokeWidth="1.5"
                         strokeLinecap="round"
+                        className="relative translate-x-0 transition-transform duration-500 group-hover:translate-x-1"
                         aria-hidden
                       >
                         <path d="M5 12h14M13 5l7 7-7 7" />
@@ -583,9 +590,9 @@ export default function Home() {
           </section>
         </main>
 
-        <ProjectModal
+        <ProjectPage
           project={activeProject}
-          onClose={() => setActiveProject(null)}
+          onBack={() => setActiveProject(null)}
         />
       </div>
     </SmoothScroll>
