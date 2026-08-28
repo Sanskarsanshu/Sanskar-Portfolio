@@ -49,6 +49,7 @@ export default function Home() {
   const isMobile = useIsMobile();
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [terminalMinimized, setTerminalMinimized] = useState(false);
 
   return (
     <SmoothScroll>
@@ -597,18 +598,22 @@ export default function Home() {
           onBack={() => setActiveProject(null)}
         />
 
-        {!terminalOpen && (
+        {/* Floating terminal open button — only when terminal is fully closed */}
+        {!terminalOpen && !terminalMinimized && (
           <button
             type="button"
-            onClick={() => setTerminalOpen(true)}
+            onClick={() => {
+              setTerminalMinimized(false);
+              setTerminalOpen(true);
+            }}
             className="fixed bottom-4 right-4 md:bottom-6 md:right-6 w-[48px] h-[48px] md:w-[64px] md:h-[64px] z-50 cursor-pointer hover:scale-105 transition-transform bg-transparent border-0"
             aria-label="Open Terminal"
           >
-            <img 
-              src="/terminal_icon.png" 
-              alt="Open Terminal" 
-              width={256} 
-              height={256} 
+            <img
+              src="/terminal_icon.png"
+              alt="Open Terminal"
+              width={256}
+              height={256}
               className="w-full h-full object-contain drop-shadow-2xl"
             />
           </button>
@@ -616,11 +621,18 @@ export default function Home() {
 
         <TerminalOverlay
           isOpen={terminalOpen}
-          onClose={() => setTerminalOpen(false)}
+          isMinimized={terminalMinimized}
+          onClose={() => {
+            setTerminalOpen(false);
+            setTerminalMinimized(false);
+          }}
+          onMinimize={() => setTerminalMinimized(true)}
+          onRestore={() => setTerminalMinimized(false)}
           onOpenProject={(id) => {
             const p = PROJECTS.find((proj) => proj.section === id);
             if (p) setActiveProject(p);
             setTerminalOpen(false);
+            setTerminalMinimized(false);
           }}
         />
       </div>
