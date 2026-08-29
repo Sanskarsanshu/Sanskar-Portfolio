@@ -375,10 +375,6 @@ function playKeyClick(seed = 0) {
       installAudioUnlock();
     }
     const ctx = audioCtx;
-    if (ctx.state === "suspended") {
-      ctx.resume().catch(() => {});
-      return;
-    }
     const trigger = () => {
       const available = keySoundBuffers.filter(
         (b): b is AudioBuffer => b !== null
@@ -398,6 +394,18 @@ function playKeyClick(seed = 0) {
       gain.connect(ctx.destination);
       src.start();
     };
+
+    if (ctx.state === "suspended") {
+      ctx.resume().then(() => {
+        if (keySoundBuffers.some((b) => b !== null)) {
+          trigger();
+        } else {
+          loadKeySounds(ctx).then(trigger);
+        }
+      }).catch(() => {});
+      return;
+    }
+
     if (keySoundBuffers.some((b) => b !== null)) {
       trigger();
     } else {
