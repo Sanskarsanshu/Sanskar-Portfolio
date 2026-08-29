@@ -143,7 +143,7 @@ export default function TerminalOverlay({ isOpen, onClose, onOpenProject }: Term
     }
   };
 
-  const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
       const trimmed = input.trim();
@@ -182,7 +182,7 @@ export default function TerminalOverlay({ isOpen, onClose, onOpenProject }: Term
       setHistoryIndex(-1);
       
       // Execute command
-      const output = await executeCommand(input);
+      const output = executeCommand(input);
       handleOutput(output);
       setInput("");
       

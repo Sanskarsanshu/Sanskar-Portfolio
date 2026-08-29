@@ -17,7 +17,7 @@ export function parseCommand(input: string): ParsedCommand {
   };
 }
 
-export async function executeCommand(input: string): Promise<CommandOutput> {
+export function executeCommand(input: string): CommandOutput {
   const parsed = parseCommand(input);
   
   if (!parsed.command) {
@@ -28,7 +28,7 @@ export async function executeCommand(input: string): Promise<CommandOutput> {
   
   if (cmd) {
     try {
-      return await cmd.execute(parsed.args);
+      return cmd.execute(parsed.args);
     } catch (e) {
       return { type: "system", message: `Command execution failed: ${parsed.command}` };
     }
