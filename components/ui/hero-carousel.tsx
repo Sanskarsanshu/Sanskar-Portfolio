@@ -199,16 +199,27 @@ export function HeroCarousel({
           transition={swing}
         >
           {active.image && (
-            <motion.img
-              src={active.image}
-              alt=""
-              aria-hidden
-              draggable={false}
-              className="absolute inset-0 h-full w-full object-cover"
-              initial={{ scale: reduced ? 1.28 : 1.42 }}
-              animate={{ scale: 1.28 }}
-              transition={reduced ? { duration: 0 } : { duration: 6, ease: "linear" }}
-            />
+            active.image.endsWith('.mp4') ? (
+              <video
+                src={active.image}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 h-full w-full object-cover transform scale-[1.28]"
+              />
+            ) : (
+              <motion.img
+                src={active.image}
+                alt=""
+                aria-hidden
+                draggable={false}
+                className="absolute inset-0 h-full w-full object-cover"
+                initial={{ scale: reduced ? 1.28 : 1.42 }}
+                animate={{ scale: 1.28 }}
+                transition={reduced ? { duration: 0 } : { duration: 6, ease: "linear" }}
+              />
+            )
           )}
           <div
             className="absolute inset-0"
@@ -353,13 +364,25 @@ export function HeroCarousel({
               transition={spring}
             >
               {item.image && (
-                <img
-                  src={item.image}
-                  alt=""
-                  draggable={false}
-                  className="h-full w-full object-cover"
-                  style={{ objectPosition: "50% 26%" }}
-                />
+                item.image.endsWith('.mp4') ? (
+                  <video
+                    src={item.image}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="h-full w-full object-cover"
+                    style={{ objectPosition: "50% 26%" }}
+                  />
+                ) : (
+                  <img
+                    src={item.image}
+                    alt=""
+                    draggable={false}
+                    className="h-full w-full object-cover"
+                    style={{ objectPosition: "50% 26%" }}
+                  />
+                )
               )}
               <motion.span
                 aria-hidden
