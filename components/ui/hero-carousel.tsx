@@ -206,7 +206,7 @@ export function HeroCarousel({
                 loop
                 muted
                 playsInline
-                className="absolute inset-0 h-full w-full object-cover transform scale-[1.28]"
+                className="absolute inset-0 h-full w-full object-contain"
               />
             ) : (
               <motion.img
@@ -214,10 +214,7 @@ export function HeroCarousel({
                 alt=""
                 aria-hidden
                 draggable={false}
-                className="absolute inset-0 h-full w-full object-cover"
-                initial={{ scale: reduced ? 1.28 : 1.42 }}
-                animate={{ scale: 1.28 }}
-                transition={reduced ? { duration: 0 } : { duration: 6, ease: "linear" }}
+                className="absolute inset-0 h-full w-full object-contain"
               />
             )
           )}
