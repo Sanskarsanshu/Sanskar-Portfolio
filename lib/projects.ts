@@ -41,11 +41,12 @@ export const PROJECTS: Project[] = [
       "A comprehensive role-based portal for admins, teachers, and students deployed at a college. Supports 25+ subjects with real-time analytics. Implemented dynamic QR codes, OTPs, and facial recognition for secure check-ins. Optimized for high concurrency, achieving sub-200ms API response times. Includes correction-request workflows and received strong stakeholder validation.",
     badge: "Production",
     accent: "#205c8c",
+    logo: "/projects/verisync/first.png",
     media: [
       {
         id: "vs-1",
         title: "Dashboard\nOverview",
-        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80",
+        image: "/projects/verisync/mainpage.png",
         credit: "VERISYNC · ADMIN PORTAL",
         meta: ["150+ STUDENTS", "25+ SUBJECTS"],
         accent: "#205c8c",
@@ -53,7 +54,7 @@ export const PROJECTS: Project[] = [
       {
         id: "vs-2",
         title: "QR Code\nAttendance",
-        image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+        image: "/projects/verisync/page2.png",
         credit: "VERISYNC · LIVE SESSION",
         meta: ["DYNAMIC QR", "OTP + FACE ID"],
         accent: "#1a4a72",
@@ -61,7 +62,7 @@ export const PROJECTS: Project[] = [
       {
         id: "vs-3",
         title: "Analytics\n& Reports",
-        image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
+        image: "",
         credit: "VERISYNC · ANALYTICS",
         meta: ["SUB-200MS API", "REAL-TIME"],
         accent: "#163d5e",
@@ -80,11 +81,12 @@ export const PROJECTS: Project[] = [
       "A robust multi-restaurant ordering platform built with real-time state synchronization. It features distinct role-based interfaces for Customers, Restaurant Owners, Staff, and Delivery Partners. Implemented the complete order-state workflow, restaurant onboarding, menu management, secure checkout, and WebSockets for real-time order status updates.",
     badge: "In Development",
     accent: "#7c3515",
+    logo: "/projects/feedme/first.png",
     media: [
       {
         id: "fm-1",
         title: "Customer\nOrdering",
-        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80",
+        image: "/projects/feedme/mainpage.png",
         credit: "FEEDME · CUSTOMER VIEW",
         meta: ["MULTI-ROLE", "REAL-TIME"],
         accent: "#7c3515",
@@ -92,7 +94,7 @@ export const PROJECTS: Project[] = [
       {
         id: "fm-2",
         title: "Restaurant\nDashboard",
-        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80",
+        image: "/projects/feedme/page2.png",
         credit: "FEEDME · OWNER PORTAL",
         meta: ["WEBSOCKETS", "LIVE ORDERS"],
         accent: "#612a10",
@@ -100,7 +102,7 @@ export const PROJECTS: Project[] = [
       {
         id: "fm-3",
         title: "Delivery\nTracking",
-        image: "https://images.unsplash.com/photo-1526367790999-0150786686a2?w=900&q=80",
+        image: "",
         credit: "FEEDME · DELIVERY",
         meta: ["4 ROLES", "WEBHOOKS"],
         accent: "#4d2010",
@@ -127,11 +129,12 @@ export const PROJECTS: Project[] = [
     details:
       "Architected a multi-tenant SaaS platform featuring an asynchronous email processing pipeline decoupled from the request lifecycle. The system uses Celery workers and Redis for throttling, bounce protection, and domain verification independently of the API. Built a stateless FastAPI microservice for AI resume scoring (ATS) and LLM job matching, scaling horizontally for high throughput.",
     accent: "#1a3a1a",
+    logo: "/projects/ai-career/first.png",
     media: [
       {
         id: "ai-1",
         title: "Resume\nAnalyzer",
-        image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&q=80",
+        image: "/projects/ai-career/mainpage.png",
         credit: "AI OS · LLM ENGINE",
         meta: ["ATS SCORING", "LLM MATCH"],
         accent: "#1a3a1a",
@@ -139,7 +142,7 @@ export const PROJECTS: Project[] = [
       {
         id: "ai-2",
         title: "Outreach\nPipeline",
-        image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80",
+        image: "/projects/ai-career/page2.png",
         credit: "AI OS · EMAIL ENGINE",
         meta: ["CELERY", "AWS SES"],
         accent: "#152e15",
@@ -147,7 +150,7 @@ export const PROJECTS: Project[] = [
       {
         id: "ai-3",
         title: "Multi-tenant\nSaaS",
-        image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=900&q=80",
+        image: "",
         credit: "AI OS · ARCHITECTURE",
         meta: ["MICROSERVICES", "REDIS"],
         accent: "#102210",
