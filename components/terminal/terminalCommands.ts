@@ -56,6 +56,21 @@ export const COMMANDS: Record<string, Command> = {
       return { type: "system", message: `cd: ${target}: No such file or directory` };
     }
   },
+  open: {
+    name: "open",
+    description: "open a link or file",
+    execute: (args) => {
+      const target = args[0]?.toLowerCase();
+      if (!target) return { type: "system", message: "Usage: open <github|linkedin|resume|email>" };
+      
+      const cmd = COMMANDS[target];
+      if (cmd && ["github", "linkedin", "resume", "email"].includes(target)) {
+        return cmd.execute([]);
+      }
+      
+      return { type: "system", message: `open: ${target}: No such file, link, or directory` };
+    }
+  },
   projects: {
     name: "projects",
     description: "list projects",
