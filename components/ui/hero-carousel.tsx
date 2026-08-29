@@ -198,16 +198,18 @@ export function HeroCarousel({
           exit={{ opacity: 0 }}
           transition={swing}
         >
-          <motion.img
-            src={active.image}
-            alt=""
-            aria-hidden
-            draggable={false}
-            className="absolute inset-0 h-full w-full object-cover"
-            initial={{ scale: reduced ? 1.28 : 1.42 }}
-            animate={{ scale: 1.28 }}
-            transition={reduced ? { duration: 0 } : { duration: 6, ease: "linear" }}
-          />
+          {active.image && (
+            <motion.img
+              src={active.image}
+              alt=""
+              aria-hidden
+              draggable={false}
+              className="absolute inset-0 h-full w-full object-cover"
+              initial={{ scale: reduced ? 1.28 : 1.42 }}
+              animate={{ scale: 1.28 }}
+              transition={reduced ? { duration: 0 } : { duration: 6, ease: "linear" }}
+            />
+          )}
           <div
             className="absolute inset-0"
             style={{ backgroundColor: accent, mixBlendMode: "color" }}
@@ -350,13 +352,15 @@ export function HeroCarousel({
               animate={{ height: i === index ? fullH : halfH }}
               transition={spring}
             >
-              <img
-                src={item.image}
-                alt=""
-                draggable={false}
-                className="h-full w-full object-cover"
-                style={{ objectPosition: "50% 26%" }}
-              />
+              {item.image && (
+                <img
+                  src={item.image}
+                  alt=""
+                  draggable={false}
+                  className="h-full w-full object-cover"
+                  style={{ objectPosition: "50% 26%" }}
+                />
+              )}
               <motion.span
                 aria-hidden
                 className="absolute inset-0 bg-black"

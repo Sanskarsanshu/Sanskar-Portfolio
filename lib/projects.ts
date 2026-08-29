@@ -14,6 +14,8 @@ export type ProjectDetail = {
   badge?: string;
   /** Accent hue used in the hero carousel backdrop when no media is set. */
   accent?: string;
+  /** Optional logo or animation URL for the very first intro slide. */
+  logo?: string;
 };
 
 export type Project = ProjectDetail & {
