@@ -221,14 +221,6 @@ export function HeroCarousel({
               />
             )
           )}
-          <div
-            className="absolute inset-0"
-            style={{ backgroundColor: accent, mixBlendMode: "color" }}
-          />
-          <div
-            className="absolute inset-0 opacity-55"
-            style={{ backgroundColor: accent, mixBlendMode: "multiply" }}
-          />
         </motion.div>
       </AnimatePresence>
 
