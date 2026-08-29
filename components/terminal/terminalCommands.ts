@@ -56,21 +56,6 @@ export const COMMANDS: Record<string, Command> = {
       return { type: "system", message: `cd: ${target}: No such file or directory` };
     }
   },
-  open: {
-    name: "open",
-    description: "open a link or file",
-    execute: (args) => {
-      const target = args[0]?.toLowerCase();
-      if (!target) return { type: "system", message: "Usage: open <github|linkedin|resume|email>" };
-      
-      const cmd = COMMANDS[target];
-      if (cmd && ["github", "linkedin", "resume", "email"].includes(target)) {
-        return cmd.execute([]);
-      }
-      
-      return { type: "system", message: `open: ${target}: No such file, link, or directory` };
-    }
-  },
   projects: {
     name: "projects",
     description: "list projects",
@@ -84,16 +69,20 @@ export const COMMANDS: Record<string, Command> = {
   },
   "open": {
     name: "open",
-    description: "open project or file (e.g. open verisync)",
+    description: "open project or file (e.g. open verisync, open github)",
     execute: (args) => {
-      if (args.length === 0) return { type: "system", message: "Usage: open <project_name|resume>\nAvailable: verisync, feedme, career-os, resume" };
+      if (args.length === 0) return { type: "system", message: "Usage: open <project_name|github|linkedin|email|resume>\nAvailable: verisync, feedme, career-os, resume, github, linkedin, email" };
       
       const target = args[0].toLowerCase();
       
       if (target === "verisync") return { type: "action", action: "open_project", payload: "project1" };
       if (target === "feedme") return { type: "action", action: "open_project", payload: "project2" };
       if (target === "career-os") return { type: "action", action: "open_project", payload: "project3" };
-      if (target === "resume") return { type: "action", action: "open_url", payload: LINKS.resume };
+      
+      const cmd = COMMANDS[target];
+      if (cmd && ["github", "linkedin", "resume", "email"].includes(target)) {
+        return cmd.execute([]);
+      }
       
       return { type: "system", message: `No project or file found matching '${target}'` };
     }
