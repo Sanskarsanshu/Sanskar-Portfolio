@@ -20,8 +20,8 @@ import GitHubTelemetry from "@/components/GitHubTelemetry";
 import CommandPalette from "@/components/CommandPalette";
 import dynamic from "next/dynamic";
 
-const GitHubCalendar = dynamic(
-  () => import("react-github-calendar").then((mod) => mod.GitHubCalendar),
+const GitHubContributionCalendar = dynamic(
+  () => import("@/components/GitHubContributionCalendar"),
   { ssr: false }
 );
 
@@ -389,24 +389,8 @@ export default function Home() {
               </Reveal>
 
               {/* GitHub Activity */}
-              <Reveal delay={400} className="relative rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 flex flex-col justify-center items-center col-span-1 md:col-span-2 overflow-hidden">
-                <div className="flex items-center justify-between w-full mb-6">
-                  <h3 className="text-xl sm:text-2xl font-bold text-ice-50">Contribution Calendar</h3>
-                  <span className="text-xs font-mono text-ice-400">Past 12 Months</span>
-                </div>
-                <div className="w-full overflow-x-auto flex justify-center custom-scrollbar pb-2">
-                  <GitHubCalendar 
-                    username={SITE_CONFIG.githubUsername} 
-                    colorScheme="dark"
-                    blockSize={12}
-                    blockMargin={4}
-                    fontSize={12}
-                    theme={{
-                      light: ['#0f131a', '#183f5e', '#205c8c', '#3684c7', '#65b4f7'],
-                      dark: ['#0f131a', '#183f5e', '#205c8c', '#3684c7', '#65b4f7'],
-                    }}
-                  />
-                </div>
+              <Reveal delay={400} className="col-span-1 md:col-span-2">
+                <GitHubContributionCalendar />
               </Reveal>
             </div>
           </section>
@@ -526,7 +510,7 @@ export default function Home() {
               keyboard on the right has room to bob its random keys. */}
           <section
             data-kb-section="contact"
-            className="relative py-24 md:min-h-screen flex flex-col justify-center p-6 sm:p-10 md:p-14 overflow-hidden"
+            className="relative pt-24 pb-36 sm:pb-44 md:pt-28 md:pb-52 min-h-screen flex flex-col justify-center p-6 sm:p-10 md:p-14"
           >
             <div className="max-w-xl relative">
               <Reveal>
