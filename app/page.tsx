@@ -14,6 +14,10 @@ import { useIsMobile } from "@/lib/useIsMobile";
 import { SKILLS_FLAT } from "@/lib/skills";
 import { PROJECTS, type Project } from "@/lib/projects";
 import { JOURNEY, ACHIEVEMENTS } from "@/lib/journey";
+import { SITE_CONFIG } from "@/lib/config";
+import SystemStatusPill from "@/components/SystemStatusPill";
+import GitHubTelemetry from "@/components/GitHubTelemetry";
+import CommandPalette from "@/components/CommandPalette";
 import dynamic from "next/dynamic";
 
 const GitHubCalendar = dynamic(
@@ -21,10 +25,10 @@ const GitHubCalendar = dynamic(
   { ssr: false }
 );
 
-const EMAIL = "iamsanskar92@gmail.com";
-const LINKEDIN_URL = "https://www.linkedin.com/in/sanskar-19b21a2ba/";
-const GITHUB_URL = "https://github.com/Sanskarsanshu";
-const LEETCODE_URL = "TODO: ADD_LEETCODE_URL";
+const EMAIL = SITE_CONFIG.email;
+const LINKEDIN_URL = SITE_CONFIG.linkedinUrl;
+const GITHUB_URL = SITE_CONFIG.githubUrl;
+const LEETCODE_URL = SITE_CONFIG.leetcodeUrl;
 
 // Hero name split per word so each can rise independently. Whitespace
 // preserved as its own span so the line wraps naturally if needed.
@@ -71,12 +75,7 @@ export default function Home() {
             >
               SANSKAR
             </span>
-            {/* Wrapper (not the pill itself) carries the hide: .status-pill
-                hard-sets display:inline-flex, which beats Tailwind's .hidden
-                due to CSS source order, so hiding must happen on a parent. */}
-            <span className="hidden md:inline-flex">
-              <span className="status-pill">{t("header.availability")}</span>
-            </span>
+            <SystemStatusPill />
           </div>
           <div className="flex items-center gap-2 pointer-events-auto">
             <SeasonPicker />
@@ -384,22 +383,30 @@ export default function Home() {
                  <h3 className="text-5xl font-bold text-ice-50 mb-2">300+</h3>
                  <p className="font-mono text-sm text-ice-400">LeetCode Problems Solved</p>
               </Reveal>
+              {/* GitHub Real-Time Telemetry */}
+              <Reveal delay={350} className="col-span-1 md:col-span-2">
+                <GitHubTelemetry />
+              </Reveal>
+
               {/* GitHub Activity */}
               <Reveal delay={400} className="relative rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 flex flex-col justify-center items-center col-span-1 md:col-span-2 overflow-hidden">
-                 <h3 className="text-xl sm:text-2xl font-bold text-ice-50 mb-6">Open Source Activity</h3>
-                 <div className="w-full overflow-x-auto flex justify-center custom-scrollbar pb-2">
-                   <GitHubCalendar 
-                     username="Sanskarsanshu" 
-                     colorScheme="dark"
-                     blockSize={12}
-                     blockMargin={4}
-                     fontSize={12}
-                     theme={{
-                       light: ['#0f131a', '#183f5e', '#205c8c', '#3684c7', '#65b4f7'],
-                       dark: ['#0f131a', '#183f5e', '#205c8c', '#3684c7', '#65b4f7'],
-                     }}
-                   />
-                 </div>
+                <div className="flex items-center justify-between w-full mb-6">
+                  <h3 className="text-xl sm:text-2xl font-bold text-ice-50">Contribution Calendar</h3>
+                  <span className="text-xs font-mono text-ice-400">Past 12 Months</span>
+                </div>
+                <div className="w-full overflow-x-auto flex justify-center custom-scrollbar pb-2">
+                  <GitHubCalendar 
+                    username={SITE_CONFIG.githubUsername} 
+                    colorScheme="dark"
+                    blockSize={12}
+                    blockMargin={4}
+                    fontSize={12}
+                    theme={{
+                      light: ['#0f131a', '#183f5e', '#205c8c', '#3684c7', '#65b4f7'],
+                      dark: ['#0f131a', '#183f5e', '#205c8c', '#3684c7', '#65b4f7'],
+                    }}
+                  />
+                </div>
               </Reveal>
             </div>
           </section>
@@ -623,6 +630,8 @@ export default function Home() {
             setTerminalOpen(false);
           }}
         />
+
+        <CommandPalette onOpenTerminal={() => setTerminalOpen(true)} />
       </div>
     </SmoothScroll>
   );

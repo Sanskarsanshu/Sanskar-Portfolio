@@ -158,7 +158,6 @@ export function HeroCarousel({
   if (!active) return null
 
   const lines = active.title.split("\n")
-  const accent = active.accent ?? "#3684c7"
 
   return (
     <div

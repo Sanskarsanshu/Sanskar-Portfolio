@@ -94,9 +94,12 @@ export default function TerminalOverlay({ isOpen, onClose, onOpenProject }: Term
     }
   }, [history, isMinimized]);
 
-  // Completely reset the terminal session when closed
+  // Completely reset the terminal session when closed (only after it has actually been opened)
+  const wasOpenRef = useRef(false);
   useEffect(() => {
-    if (!isOpen) {
+    if (isOpen) {
+      wasOpenRef.current = true;
+    } else if (wasOpenRef.current) {
       // Wait for the exit animation to finish before wiping state
       const timer = setTimeout(() => {
         setHistory([
@@ -117,6 +120,7 @@ export default function TerminalOverlay({ isOpen, onClose, onOpenProject }: Term
         x.set(0);
         y.set(0);
         savedPos.current = { x: 0, y: 0 };
+        wasOpenRef.current = false;
       }, 300);
       
       return () => clearTimeout(timer);

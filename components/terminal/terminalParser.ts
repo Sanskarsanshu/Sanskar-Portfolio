@@ -29,7 +29,7 @@ export function executeCommand(input: string): CommandOutput {
   if (cmd) {
     try {
       return cmd.execute(parsed.args);
-    } catch (e) {
+    } catch {
       return { type: "system", message: `Command execution failed: ${parsed.command}` };
     }
   } else {

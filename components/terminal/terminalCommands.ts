@@ -1,4 +1,3 @@
-import type { Project } from "@/lib/projects";
 import { PROJECTS } from "@/lib/projects";
 
 // The types of output a command can return
@@ -12,7 +11,7 @@ export type CommandOutput =
 export interface Command {
   name: string;
   description: string;
-  execute: (args: string[]) => CommandOutput | Promise<CommandOutput>;
+  execute: (args: string[]) => CommandOutput;
 }
 
 // Ensure exact profile links are used

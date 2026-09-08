@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
   // runtime image can drop npm/node_modules entirely and just run
   // `node server.js`. Trims the final image to ~100 MB.
   output: "standalone",
+  outputFileTracingRoot: process.cwd(),
 
   async headers() {
     return [

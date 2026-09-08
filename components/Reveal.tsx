@@ -1,12 +1,12 @@
 "use client";
 
 import {
-  createElement,
   useEffect,
   useRef,
   type CSSProperties,
   type ElementType,
   type ReactNode,
+  type Ref,
 } from "react";
 
 type Direction = "up" | "down" | "left" | "right" | "none";
@@ -80,14 +80,19 @@ export default function Reveal({
     ["--reveal-from" as string]: axis[direction],
   };
 
-  return createElement(
-    Tag,
-    {
-      // eslint-disable-next-line react-hooks/refs
-      ref,
-      className: `reveal ${className}`.trim(),
-      style,
-    },
-    children
+  const Component = Tag as React.ComponentType<{
+    ref?: Ref<HTMLElement | null>;
+    className?: string;
+    style?: CSSProperties;
+    children?: ReactNode;
+  }>;
+  return (
+    <Component
+      ref={ref}
+      className={`reveal ${className}`.trim()}
+      style={style}
+    >
+      {children}
+    </Component>
   );
 }

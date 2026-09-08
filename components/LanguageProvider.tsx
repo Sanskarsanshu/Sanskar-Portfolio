@@ -7,12 +7,13 @@ import {
   type ReactNode,
 } from "react";
 import {
+  type Lang,
   translate,
 } from "@/lib/i18n";
 
 type LanguageCtx = {
-  lang: "en";
-  setLang: (lang: "en") => void;
+  lang: Lang;
+  setLang: (lang: Lang) => void;
   t: (path: string) => string;
 };
 
