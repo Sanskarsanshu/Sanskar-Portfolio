@@ -18,6 +18,7 @@ import { SITE_CONFIG } from "@/lib/config";
 import SystemStatusPill from "@/components/SystemStatusPill";
 import GitHubTelemetry from "@/components/GitHubTelemetry";
 import CommandPalette from "@/components/CommandPalette";
+import { OtherProjectsCarousel } from "@/components/OtherProjectsCarousel";
 import dynamic from "next/dynamic";
 
 const GitHubContributionCalendar = dynamic(
@@ -401,7 +402,7 @@ export default function Home() {
               key={p.num}
               data-kb-section={p.section}
               data-kb-highlights={(p.highlights ?? []).join(",")}
-              className="relative py-20 md:min-h-screen flex items-center p-6 sm:p-10 md:p-14 overflow-hidden"
+              className="relative py-16 md:py-24 flex items-center p-6 sm:p-10 md:p-14 overflow-hidden"
             >
               <span
                 aria-hidden
@@ -468,8 +469,8 @@ export default function Home() {
                   <div
                     className={
                       p.align === "right"
-                        ? "flex md:justify-end pointer-events-auto"
-                        : "flex pointer-events-auto"
+                        ? "flex md:justify-end pointer-events-auto items-center gap-3"
+                        : "flex pointer-events-auto items-center gap-3"
                     }
                   >
                     {/* Premium cinematic "View Project" CTA */}
@@ -478,7 +479,7 @@ export default function Home() {
                       onClick={() => setActiveProject(p)}
                       data-cursor="hover"
                       data-magnetic
-                      className="group relative inline-flex items-center gap-3 overflow-hidden border border-ice-600/50 bg-transparent px-6 py-3 text-sm font-mono uppercase tracking-[0.15em] text-ice-200 transition-all duration-500 hover:border-ice-300/80 hover:text-white"
+                      className="group relative inline-flex items-center gap-3 overflow-hidden border border-ice-600/50 bg-transparent px-6 py-3 text-sm font-mono uppercase tracking-[0.15em] text-ice-200 transition-all duration-500 hover:border-ice-300/80 hover:text-white shrink-0"
                     >
                       {/* Sliding fill on hover */}
                       <span className="absolute inset-0 -translate-x-full bg-white/6 transition-transform duration-500 ease-out group-hover:translate-x-0" />
@@ -500,11 +501,70 @@ export default function Home() {
                         <path d="M5 12h14M13 5l7 7-7 7" />
                       </svg>
                     </button>
+
+                    {/* GitHub Link */}
+                    {p.github && (
+                      <a
+                        href={p.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-cursor="hover"
+                        data-magnetic
+                        aria-label="View Source on GitHub"
+                        className="group relative inline-flex items-center justify-center w-[46px] h-[46px] overflow-hidden border border-ice-600/50 bg-transparent text-ice-400 transition-all duration-500 hover:border-ice-300/80 hover:text-white shrink-0"
+                      >
+                        <span className="absolute inset-0 translate-y-full bg-white/6 transition-transform duration-500 ease-out group-hover:translate-y-0" />
+                        <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" className="relative transition-transform duration-500 group-hover:scale-110" aria-hidden>
+                          <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z" />
+                        </svg>
+                      </a>
+                    )}
+
+                    {/* Live Link */}
+                    {p.url && (
+                      <a
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        data-cursor="hover"
+                        data-magnetic
+                        aria-label="View Live Demo"
+                        className="group relative inline-flex items-center justify-center w-[46px] h-[46px] overflow-hidden border border-ice-600/50 bg-transparent text-ice-400 transition-all duration-500 hover:border-ice-300/80 hover:text-white shrink-0"
+                      >
+                        <span className="absolute inset-0 translate-y-full bg-white/6 transition-transform duration-500 ease-out group-hover:translate-y-0" />
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="relative transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden>
+                          <path d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                        </svg>
+                      </a>
+                    )}
                   </div>
                 </Reveal>
               </div>
             </section>
           ))}
+
+          {/* Other Featured Projects (GitHub Carousel) */}
+          <section
+            data-kb-section="other-projects"
+            className="relative py-20 flex flex-col items-center justify-center overflow-hidden"
+          >
+            <div className="w-full max-w-7xl px-6 sm:px-10 md:px-14 flex flex-col pointer-events-auto">
+              <Reveal>
+                <div className="flex flex-col items-center md:items-start mb-8 md:mb-2 text-center md:text-left z-10 relative">
+                  <p className="font-mono text-sm text-ice-400 mb-2 uppercase tracking-widest">
+                    Open Source
+                  </p>
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-ice-50">
+                    Other FEATURED projects
+                  </h2>
+                </div>
+              </Reveal>
+              
+              <Reveal delay={150}>
+                <OtherProjectsCarousel />
+              </Reveal>
+            </div>
+          </section>
 
           {/* Contact — copy pinned to the left so the (large, hero-posed)
               keyboard on the right has room to bob its random keys. */}

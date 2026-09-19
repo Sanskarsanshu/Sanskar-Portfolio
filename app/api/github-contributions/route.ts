@@ -65,6 +65,9 @@ export async function GET(req: NextRequest) {
 
   try {
     const apiUrl = `https://github-contributions-api.jogruber.de/v4/${username}?y=${yearParam}&client=sanskar-portfolio`;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 4000);
+
     const response = await fetch(apiUrl, {
       headers: {
         "User-Agent": "SanskarPortfolio/2.0",
@@ -72,7 +75,10 @@ export async function GET(req: NextRequest) {
       },
       // Next.js fetch revalidation
       next: { revalidate: isCurrentYear ? 900 : 86400 },
+      signal: controller.signal,
     });
+    
+    clearTimeout(timeoutId);
 
     if (!response.ok) {
       throw new Error(`Upstream contribution provider returned status ${response.status}`);

@@ -143,6 +143,8 @@ export const PROJECTS: Project[] = [
     highlights: ["typescript", "react", "postgresql"],
     align: "left",
     section: "project1",
+    github: "#",
+    url: "#",
   },
   {
     num: "02",
@@ -183,6 +185,8 @@ export const PROJECTS: Project[] = [
     highlights: ["react", "nodedotjs"],
     align: "right",
     section: "project2",
+    github: "#",
+    url: "#",
   },
   {
     num: "03",
@@ -231,5 +235,7 @@ export const PROJECTS: Project[] = [
     highlights: ["fastapi", "python", "postgresql", "redis"],
     align: "left",
     section: "project3",
+    github: "#",
+    url: "#",
   },
 ];

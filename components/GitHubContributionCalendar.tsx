@@ -87,7 +87,9 @@ export default function GitHubContributionCalendar() {
     try {
       const res = await fetch(`/api/github-contributions?year=${year}`);
       if (!res.ok) {
-        throw new Error(`Failed to load ${year} contributions (HTTP ${res.status})`);
+        const errData = await res.json().catch(() => null);
+        setError(errData?.error || `Failed to load ${year} contributions (HTTP ${res.status})`);
+        return;
       }
       const payload: GitHubContributionsPayload = await res.json();
 
@@ -97,7 +99,8 @@ export default function GitHubContributionCalendar() {
       setLastSuccessfulDate(payload.lastUpdated);
       setError(null);
     } catch (err) {
-      console.error(`[GitHubContributionCalendar] Fetch error:`, err);
+      // Use console.warn instead of console.error to prevent Next.js dev overlay from hijacking it
+      console.warn(`[GitHubContributionCalendar] Fetch error:`, err);
       setError(err instanceof Error ? err.message : "GitHub contributions unavailable");
     } finally {
       setLoading(false);
