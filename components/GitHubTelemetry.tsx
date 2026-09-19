@@ -87,7 +87,7 @@ export default function GitHubTelemetry() {
   // Loading skeleton
   if (loading) {
     return (
-      <div className="w-full rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 animate-pulse text-ice-300">
+      <div className="relative w-full rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 animate-pulse text-ice-300">
         <div className="h-4 w-48 bg-ink-2/60 rounded mb-6" />
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
           {[1, 2, 3, 4].map((i) => (
@@ -119,7 +119,7 @@ export default function GitHubTelemetry() {
   const isDegraded = data?.status === "degraded";
 
   return (
-    <div className="w-full rounded-2xl bg-ink-1/80 backdrop-blur-md border border-ink-3 p-6 sm:p-8 col-span-1 md:col-span-2 flex flex-col gap-6 text-ice-100">
+    <div className="relative w-full rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 col-span-1 md:col-span-2 flex flex-col gap-6 text-ice-100">
       {/* Telemetry Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-ink-3">
         <div className="flex items-center gap-2.5">

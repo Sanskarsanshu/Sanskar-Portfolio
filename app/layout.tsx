@@ -5,6 +5,7 @@ import CustomCursor from "@/components/CustomCursor";
 import FrozenBackground from "@/components/FrozenBackground";
 import ScrollProgress from "@/components/ScrollProgress";
 import MagneticTargets from "@/components/MagneticTargets";
+import { SlideshowBackground } from "@/components/SlideshowBackground";
 import SeasonProvider, {
   SEASON_BOOT_SCRIPT,
 } from "@/components/SeasonProvider";
@@ -71,6 +72,7 @@ export default function RootLayout({
         <LanguageProvider>
           <SeasonProvider>
             <FrozenBackground />
+            <SlideshowBackground />
             <ScrollProgress />
             {children}
             <CustomCursor />

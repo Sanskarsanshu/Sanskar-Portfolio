@@ -4,7 +4,7 @@
 // (keyboardBase, particle colours) are consumed by React components via
 // `useSeason()` because they live in canvases or inline SVG where CSS
 // variables don't easily reach.
-export type SeasonId = "winter" | "spring" | "summer" | "autumn";
+export type SeasonId = "winter" | "spring" | "summer" | "autumn" | "gallery";
 
 export type SeasonPalette = {
   id: SeasonId;
@@ -13,6 +13,14 @@ export type SeasonPalette = {
   accent: string;
   // Base plastic colour of the 3D keyboard body.
   keyboardBase: string;
+  // Optional PBR metalness override
+  keyboardMetalness?: number;
+  // Optional PBR roughness override
+  keyboardRoughness?: number;
+  // Optional emissive glow colour
+  keyboardEmissive?: string;
+  // Optional emissive intensity
+  keyboardEmissiveIntensity?: number;
   // Colour of the falling particles in FrozenBackground.
   particle: string;
   // Soft halo colour drawn around larger particles.
@@ -51,6 +59,14 @@ export const SEASONS: SeasonPalette[] = [
     keyboardBase: "#6cadef",
     particle: "rgba(220, 235, 252, 0.75)",
     particleHalo: "rgba(166, 197, 228, 0.18)",
+  },
+  {
+    id: "gallery",
+    label: "Gallery",
+    accent: "#a855f7", // purple
+    keyboardBase: "#9333ea",
+    particle: "rgba(255, 255, 255, 0.0)", // Hidden in gallery mode
+    particleHalo: "rgba(255, 255, 255, 0.0)",
   },
 ];
 

@@ -32,6 +32,14 @@ const ICONS: Record<SeasonId, React.ReactNode> = {
       <path d="M9 4l3 2 3-2M9 20l3-2 3 2M4 9l2 3-2 3M20 9l-2 3 2 3" />
     </svg>
   ),
+  // Image — gallery
+  gallery: (
+    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+      <circle cx="8.5" cy="8.5" r="1.5" />
+      <polyline points="21 15 16 10 5 21" />
+    </svg>
+  ),
 };
 
 export default function SeasonPicker({ className = "" }: { className?: string }) {

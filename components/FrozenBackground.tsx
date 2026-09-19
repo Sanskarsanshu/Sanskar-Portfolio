@@ -22,11 +22,13 @@ function particleRgba(base: string, alpha: number): string {
 // the budget the 3D scene leaves us. Pauses when the tab is hidden.
 export default function FrozenBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { palette } = useSeason();
+  const { id, palette } = useSeason();
   const particleColor = palette.particle;
   const haloColor = palette.particleHalo;
 
   useEffect(() => {
+    if (id === "gallery") return; // Don't run canvas logic if gallery is active
+
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
@@ -155,7 +157,10 @@ export default function FrozenBackground() {
       window.removeEventListener("mousemove", onMove);
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  }, [particleColor, haloColor]);
+  }, [particleColor, haloColor, id]);
+
+  // Don't render the default frozen theme if the user selected the gallery slideshow
+  if (id === "gallery") return null;
 
   return (
     <div

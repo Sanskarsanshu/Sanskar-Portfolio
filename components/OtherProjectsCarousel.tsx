@@ -23,10 +23,8 @@ export function OtherProjectsCarousel() {
   useEffect(() => {
     async function fetchRepos() {
       try {
-        // We fetch public repos for the user, sorting by updated time.
-        const res = await fetch(
-          "https://api.github.com/users/Sanskarsanshu/repos?sort=updated&per_page=15"
-        );
+        // We fetch public repos via our internal API to support authenticated GitHub requests and avoid rate-limits
+        const res = await fetch("/api/github-repos");
         
         if (!res.ok) {
           throw new Error("Failed to load GitHub repositories");

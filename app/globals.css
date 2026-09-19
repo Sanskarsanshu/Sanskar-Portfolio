@@ -112,6 +112,42 @@
   --vignette: rgba(15, 6, 7, 0.7);
 }
 
+/* ─── Gallery Theme (Slideshow) ───────────────────────────────────────── */
+:root[data-season="gallery"] {
+  --background: #000000;
+  --foreground: #ffffff;
+  
+  /* Make auroras and gradients transparent so the slideshow images show through clearly */
+  --aurora-1: transparent;
+  --aurora-2: transparent;
+  --aurora-3: transparent;
+  --aurora-4: transparent;
+  --bg-top: transparent;
+  --bg-grad-from: transparent;
+  --bg-grad-mid: transparent;
+  --bg-grad-to: transparent;
+  --vignette: rgba(0, 0, 0, 0.3);
+}
+
+/* In Gallery mode, we want all the cards to become highly transparent "liquid glass" 
+   so the beautiful background pictures can be seen through them. */
+:root[data-season="gallery"] .bg-ink-1\/75,
+:root[data-season="gallery"] .bg-ink-1\/80,
+:root[data-season="gallery"] .bg-ink-1\/70 {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+}
+
+:root[data-season="gallery"] .bg-ink-2\/60,
+:root[data-season="gallery"] .bg-ink-0\/60,
+:root[data-season="gallery"] .bg-ink-2 {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

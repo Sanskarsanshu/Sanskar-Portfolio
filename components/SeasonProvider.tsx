@@ -20,6 +20,8 @@ type SeasonCtx = {
   id: SeasonId;
   palette: SeasonPalette;
   setSeason: (id: SeasonId) => void;
+  galleryImage: string | null;
+  setGalleryImage: (url: string | null) => void;
 };
 
 const Ctx = createContext<SeasonCtx | null>(null);
@@ -33,6 +35,7 @@ export const SEASON_BOOT_SCRIPT = `(function(){try{var s=localStorage.getItem(${
 
 export default function SeasonProvider({ children }: { children: ReactNode }) {
   const [id, setId] = useState<SeasonId>(DEFAULT_SEASON);
+  const [galleryImage, setGalleryImage] = useState<string | null>(null);
 
   // On mount: read whatever the boot script already placed on <html>, so
   // React state matches the DOM attribute from the very first render.
@@ -57,10 +60,57 @@ export default function SeasonProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const palette = getPalette(id);
+  const basePalette = getPalette(id);
+  const palette = { ...basePalette };
+  
+  if (id === "gallery" && galleryImage) {
+    if (galleryImage.includes("Back5.jpg") || galleryImage.includes("Back21") || galleryImage.includes("Back22")) {
+      palette.keyboardBase = "#4A321C";
+    } else if (galleryImage.includes("Back8") || galleryImage.includes("Back9")) {
+      palette.keyboardBase = "#080808";
+    } else if (galleryImage.includes("Back3")) {
+      palette.keyboardBase = "#7A1118";
+    } else if (galleryImage.includes("Back4")) {
+      palette.keyboardBase = "#183326";
+    } else if (galleryImage.includes("Back7")) {
+      palette.keyboardBase = "#8A3F0A";
+    } else if (galleryImage.includes("Back11")) {
+      palette.keyboardBase = "#5A0B10";
+    } else if (galleryImage.includes("Back6") || galleryImage.includes("Back18") || galleryImage.includes("Back19")) {
+      palette.keyboardBase = "#050505";
+    } else if (galleryImage.includes("Back25")) {
+      palette.keyboardBase = "#46515E";
+    } else if (galleryImage.includes("Back24")) {
+      palette.keyboardBase = "#3A2A1B";
+      palette.keyboardMetalness = 0.85;
+      palette.keyboardRoughness = 0.35;
+    } else if (galleryImage.includes("Back16")) {
+      palette.keyboardBase = "#686D70";
+      palette.keyboardMetalness = 0.9;
+      palette.keyboardRoughness = 0.4;
+    } else if (galleryImage.includes("Back10") || galleryImage.includes("Back12")) {
+      palette.keyboardBase = "#686F74";
+      palette.keyboardMetalness = 0.85;
+      palette.keyboardRoughness = 0.4;
+    } else if (galleryImage.includes("Back23") || galleryImage.includes("Back17")) {
+      palette.keyboardBase = "#4A4D50";
+      palette.keyboardMetalness = 0.85;
+      palette.keyboardRoughness = 0.4;
+    } else if (galleryImage.includes("Back13") || galleryImage.includes("Back14")) {
+      palette.keyboardBase = "#1A0502";
+      palette.keyboardMetalness = 0.85;
+      palette.keyboardRoughness = 0.35;
+    } else if (galleryImage.includes("Back15") || galleryImage.includes("Back20")) {
+      palette.keyboardBase = "#181A1D";
+      palette.keyboardMetalness = 0.85;
+      palette.keyboardRoughness = 0.35;
+    }
+  }
 
   return (
-    <Ctx.Provider value={{ id, palette, setSeason }}>{children}</Ctx.Provider>
+    <Ctx.Provider value={{ id, palette, setSeason, galleryImage, setGalleryImage }}>
+      {children}
+    </Ctx.Provider>
   );
 }
 
@@ -73,6 +123,8 @@ export function useSeason(): SeasonCtx {
       id: DEFAULT_SEASON,
       palette: getPalette(DEFAULT_SEASON),
       setSeason: () => {},
+      galleryImage: null,
+      setGalleryImage: () => {},
     };
   }
   return ctx;

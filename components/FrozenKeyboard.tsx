@@ -776,8 +776,10 @@ function Keyboard({ mobile }: { mobile: boolean }) {
               wash it out to grey. */}
           <meshStandardMaterial
             color={palette.keyboardBase}
-            roughness={0.6}
-            metalness={0}
+            roughness={palette.keyboardRoughness ?? 0.6}
+            metalness={palette.keyboardMetalness ?? 0}
+            emissive={palette.keyboardEmissive ?? "#000000"}
+            emissiveIntensity={palette.keyboardEmissiveIntensity ?? 0}
           />
         </mesh>
         {keycaps}

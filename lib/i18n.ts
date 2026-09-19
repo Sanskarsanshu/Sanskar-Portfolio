@@ -17,6 +17,7 @@ export const DICT = {
     summer: "Summer",
     autumn: "Autumn",
     winter: "Winter",
+    gallery: "Gallery",
   },
   nav: {
     aria: "Sections",
