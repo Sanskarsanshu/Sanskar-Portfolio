@@ -87,7 +87,7 @@ export default function GitHubTelemetry() {
   // Loading skeleton
   if (loading) {
     return (
-      <div className="relative w-full rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 animate-pulse text-ice-300">
+      <div className="relative w-full animate-pulse text-ice-300">
         <div className="h-4 w-48 bg-ink-2/60 rounded mb-6" />
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
           {[1, 2, 3, 4].map((i) => (
@@ -102,7 +102,7 @@ export default function GitHubTelemetry() {
   // Error state
   if (error && !data) {
     return (
-      <div className="w-full rounded-2xl bg-ink-1/75 backdrop-blur-md border border-amber-500/30 p-6 text-sm text-ice-200">
+      <div className="w-full rounded-2xl border border-amber-500/30 bg-amber-500/5 p-4 text-sm text-ice-200">
         <div className="flex items-center gap-2 text-amber-400 font-bold mb-2">
           <svg viewBox="0 0 16 16" width="16" height="16" fill="currentColor">
             <path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z" />
@@ -119,7 +119,7 @@ export default function GitHubTelemetry() {
   const isDegraded = data?.status === "degraded";
 
   return (
-    <div className="relative w-full rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 col-span-1 md:col-span-2 flex flex-col gap-6 text-ice-100">
+    <div className="relative w-full flex flex-col gap-6 text-ice-100">
       {/* Telemetry Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-ink-3">
         <div className="flex items-center gap-2.5">

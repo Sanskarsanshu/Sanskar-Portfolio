@@ -186,7 +186,7 @@ export default function GitHubContributionCalendar() {
   }, [data, selectedYear]);
 
   return (
-    <div className="relative rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 flex flex-col justify-center items-center col-span-1 md:col-span-2 overflow-hidden w-full">
+    <div className="relative flex flex-col justify-center items-center w-full">
       {/* Calendar Header */}
       <div className="flex items-center justify-between w-full mb-6 relative z-20">
         <div className="flex items-center gap-2.5">

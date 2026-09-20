@@ -389,12 +389,12 @@ export default function Home() {
                  <p className="font-mono text-sm text-ice-400">LeetCode Problems Solved</p>
               </Reveal>
               {/* GitHub Real-Time Telemetry */}
-              <Reveal delay={350} className="col-span-1 md:col-span-2">
+              <Reveal delay={350} className="relative rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 col-span-1 md:col-span-2">
                 <GitHubTelemetry />
               </Reveal>
 
               {/* GitHub Activity */}
-              <Reveal delay={400} className="col-span-1 md:col-span-2">
+              <Reveal delay={400} className="relative rounded-2xl bg-ink-1/75 backdrop-blur-md border border-ink-3 p-6 sm:p-8 col-span-1 md:col-span-2 overflow-hidden">
                 <GitHubContributionCalendar />
               </Reveal>
             </div>
