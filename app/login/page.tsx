@@ -1,12 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useActionState } from "react";
 import Link from "next/link";
 import Head from "next/head";
+import { useRouter } from "next/navigation";
+import { login } from "@/app/actions/auth";
 
 export default function ShowcasePage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const revealImgRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+  const [state, formAction, pending] = useActionState(login, null);
+
+  useEffect(() => {
+    if (state?.success) {
+      router.push("/admin");
+    }
+  }, [state?.success, router]);
 
   const text = "Access the studio mainframe to edit the journey.";
   const words = text.split(" ");
@@ -148,22 +158,34 @@ export default function ShowcasePage() {
                   </span>
                 ))}
               </h1>
-              <form className="login-form cta-animate" onSubmit={(e) => e.preventDefault()}>
+              <form action={formAction} className="login-form cta-animate">
+                {state?.error && (
+                  <div style={{ color: "#ff6b6b", fontSize: "0.875rem", marginBottom: "1rem", textAlign: "center" }}>
+                    {state.error}
+                  </div>
+                )}
+                
                 <div className="input-group">
-                  <input type="email" id="email" placeholder=" " required className="login-input" autoComplete="off" />
+                  <input type="email" id="email" name="email" placeholder=" " required className="login-input" autoComplete="off" />
                   <label htmlFor="email" className="login-label">Email Address</label>
                 </div>
+                
                 <div className="input-group">
-                  <input type="password" id="password" placeholder=" " required className="login-input" autoComplete="new-password" />
+                  <input type="password" id="password" name="password" placeholder=" " required className="login-input" autoComplete="new-password" />
                   <label htmlFor="password" className="login-label">Password</label>
                 </div>
-                <button type="submit" className="cta-btn" style={{ marginTop: "16px" }}>
+                
+                <button type="submit" className="cta-btn" style={{ marginTop: "16px" }} disabled={pending}>
                   <span className="cta-btn-bg"></span>
-                  <span className="cta-btn-text">Authenticate</span>
+                  <span className="cta-btn-text">{pending ? "Authenticating..." : "Authenticate"}</span>
                   <span className="cta-btn-circle">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M5 13L13 5M13 5H6M13 5V12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
+                    {pending ? (
+                      <div className="spinner"></div>
+                    ) : (
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 13L13 5M13 5H6M13 5V12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    )}
                   </span>
                 </button>
               </form>
@@ -248,6 +270,19 @@ export default function ShowcasePage() {
             opacity: 0;
             animation: slideUpScale 0.8s cubic-bezier(0.25,0.46,0.45,0.94) forwards;
             animation-delay: 1s;
+          }
+
+          /* ===== SPINNER ===== */
+          .spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+          }
+          @keyframes spin {
+            to { transform: rotate(360deg); }
           }
 
           /* ===== LOGIN FORM ===== */
