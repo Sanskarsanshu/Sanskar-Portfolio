@@ -36,7 +36,7 @@ export default function CustomCursor() {
     const onOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       const interactive = target?.closest(
-        '[data-cursor="hover"], a, button, [role="button"]'
+        '[data-cursor="hover"], a, button, [role="button"], input, textarea'
       );
       const next = !!interactive;
       if (next !== hovered) {
