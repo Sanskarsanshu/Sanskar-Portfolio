@@ -40,6 +40,28 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+
+  async rewrites() {
+    return [
+      {
+        source: "/journey",
+        destination: "/journey/index.html",
+      },
+      {
+        source: "/journey/",
+        destination: "/journey/index.html",
+      },
+      // Rewrite hardcoded assets for the 3D journey app
+      { source: "/textures/:path*", destination: "/journey/textures/:path*" },
+      { source: "/images/:path*", destination: "/journey/images/:path*" },
+      { source: "/sounds/:path*", destination: "/journey/sounds/:path*" },
+      { source: "/videos/:path*", destination: "/journey/videos/:path*" },
+      { source: "/cursors/:path*", destination: "/journey/cursors/:path*" },
+      { source: "/poster/:path*", destination: "/journey/poster/:path*" },
+      { source: "/fonts/:path*", destination: "/journey/fonts/:path*" },
+      { source: "/Awads/:path*", destination: "/journey/Awads/:path*" },
+    ];
+  },
 };
 
 export default nextConfig;

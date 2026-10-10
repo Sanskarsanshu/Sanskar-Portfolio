@@ -62,7 +62,7 @@ export default function CommandPalette({
         title: "Jump to Featured Projects",
         subtitle: "Full-stack systems and architecture showcases",
         perform: () => {
-          document.querySelector("[data-kb-section='project-1']")?.scrollIntoView({ behavior: "smooth" });
+          document.querySelector("[data-kb-section='project1']")?.scrollIntoView({ behavior: "smooth" });
         },
       },
       {

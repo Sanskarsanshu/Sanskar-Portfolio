@@ -17,6 +17,7 @@ const SEASON_CALENDAR_THEMES: Record<SeasonId, string[]> = {
   spring: ["#0a160d", "#1b4d27", "#256d38", "#389a50", "#60d47d"],
   summer: ["#0f131a", "#4d2800", "#8a4b08", "#c97210", "#ff9c2f"],
   autumn: ["#140809", "#4d1912", "#7a281c", "#b3412b", "#e07230"],
+  gallery: ["#0f131a", "#3b0764", "#6b21a8", "#a855f7", "#c084fc"],
 };
 
 interface TooltipState {

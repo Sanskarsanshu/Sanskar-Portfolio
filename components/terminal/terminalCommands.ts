@@ -70,13 +70,14 @@ export const COMMANDS: Record<string, Command> = {
     name: "open",
     description: "open project or file (e.g. open verisync, open github)",
     execute: (args) => {
-      if (args.length === 0) return { type: "system", message: "Usage: open <project_name|github|linkedin|email|resume>\nAvailable: verisync, feedme, career-os, resume, github, linkedin, email" };
+      if (args.length === 0) return { type: "system", message: "Usage: open <project_name|github|linkedin|email|resume>\nAvailable: corepay, verisync, feedme, career-os, resume, github, linkedin, email" };
       
       const target = args[0].toLowerCase();
       
-      if (target === "verisync") return { type: "action", action: "open_project", payload: "project1" };
-      if (target === "feedme") return { type: "action", action: "open_project", payload: "project2" };
-      if (target === "career-os") return { type: "action", action: "open_project", payload: "project3" };
+      if (target === "corepay") return { type: "action", action: "open_project", payload: "project1" };
+      if (target === "verisync") return { type: "action", action: "open_project", payload: "project2" };
+      if (target === "feedme") return { type: "action", action: "open_project", payload: "project3" };
+      if (target === "career-os") return { type: "action", action: "open_project", payload: "project4" };
       
       const cmd = COMMANDS[target];
       if (cmd && ["github", "linkedin", "resume", "email"].includes(target)) {
@@ -208,6 +209,7 @@ Vidyut Vega Hackathon
                "EXPERIENCE\n" +
                "- WorldQuant BRAIN: Quantitative Research Consultant\n\n" +
                "PROJECTS\n" +
+               "- CorePay (Fintech Payment Platform)\n" +
                "- VeriSync (Production Attendance System)\n" +
                "- FeedMe (Multi-Restaurant SaaS)\n" +
                "- AI Career Outreach OS (Distributed SaaS)\n\n" +
@@ -267,7 +269,7 @@ skills          view technical stack
 journey         engineering journey
 achievements    achievements
 
-open <project>  open project (e.g., open verisync)
+open <project>  open project (e.g., open corepay)
 resume          open resume
 cat resume.txt  resume summary
 
@@ -302,6 +304,7 @@ exit            return to portfolio`
 // Autocomplete dictionary
 export const AUTOCOMPLETE_TERMS = [
   ...Object.keys(COMMANDS),
+  "corepay",
   "verisync",
   "feedme",
   "career-os",

@@ -19,7 +19,7 @@ import { SITE_CONFIG } from "@/lib/config";
 import SystemStatusPill from "@/components/SystemStatusPill";
 import GitHubTelemetry from "@/components/GitHubTelemetry";
 import CommandPalette from "@/components/CommandPalette";
-import { OtherProjectsCarousel } from "@/components/OtherProjectsCarousel";
+import { Gallery6 } from "@/components/ui/gallery6";
 import dynamic from "next/dynamic";
 
 const GitHubContributionCalendar = dynamic(
@@ -90,13 +90,14 @@ export default function Home() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 group-hover:opacity-100 transition-opacity"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
                 <span>Edit</span>
               </Link>
-              <button
+              <a
+                href="/journey"
                 data-cursor="hover"
                 className="frost-btn !py-1.5 !px-3 !text-xs flex items-center gap-1.5 group"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="opacity-70 group-hover:opacity-100 transition-opacity"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
                 <span>Journey</span>
-              </button>
+              </a>
             </span>
           </div>
         </header>
@@ -547,27 +548,14 @@ export default function Home() {
             </section>
           ))}
 
-          {/* Other Featured Projects (GitHub Carousel) */}
+          {/* Other Featured Projects (Gallery6) */}
           <section
             data-kb-section="other-projects"
-            className="relative py-20 flex flex-col items-center justify-center overflow-hidden"
+            className="relative py-20 flex flex-col items-center justify-center overflow-hidden w-full pointer-events-auto"
           >
-            <div className="w-full max-w-7xl px-6 sm:px-10 md:px-14 flex flex-col pointer-events-auto">
-              <Reveal>
-                <div className="flex flex-col items-center md:items-start mb-8 md:mb-2 text-center md:text-left z-10 relative">
-                  <p className="font-mono text-sm text-ice-400 mb-2 uppercase tracking-widest">
-                    Open Source
-                  </p>
-                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-ice-50">
-                    Other FEATURED projects
-                  </h2>
-                </div>
-              </Reveal>
-              
-              <Reveal delay={150}>
-                <OtherProjectsCarousel />
-              </Reveal>
-            </div>
+            <Reveal delay={150} className="w-full">
+              <Gallery6 heading="Other FEATURED projects" demoUrl="#" />
+            </Reveal>
           </section>
 
           {/* Contact — copy pinned to the left so the (large, hero-posed)
