@@ -13,7 +13,7 @@ import TerminalOverlay from "@/components/terminal/TerminalOverlay";
 import { useLanguage } from "@/components/LanguageProvider";
 import { useIsMobile } from "@/lib/useIsMobile";
 import { SKILLS_FLAT } from "@/lib/skills";
-import { PROJECTS, type Project } from "@/lib/projects";
+import { PROJECTS, OTHER_PROJECTS, type Project, type ProjectDetail } from "@/lib/projects";
 import { JOURNEY, ACHIEVEMENTS } from "@/lib/journey";
 import { SITE_CONFIG } from "@/lib/config";
 import SystemStatusPill from "@/components/SystemStatusPill";
@@ -53,7 +53,7 @@ function HeroWord({
 export default function Home() {
   const { t } = useLanguage();
   const isMobile = useIsMobile();
-  const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [activeProject, setActiveProject] = useState<ProjectDetail | null>(null);
   const [terminalOpen, setTerminalOpen] = useState(false);
 
   return (
@@ -554,7 +554,12 @@ export default function Home() {
             className="relative py-20 flex flex-col items-center justify-center overflow-hidden w-full pointer-events-auto"
           >
             <Reveal delay={150} className="w-full">
-              <Gallery6 heading="Other FEATURED projects" demoUrl="#" />
+              <Gallery6 
+                heading="Other FEATURED projects" 
+                demoUrl="#" 
+                items={OTHER_PROJECTS}
+                onSelect={(proj) => setActiveProject(proj)}
+              />
             </Reveal>
           </section>
 

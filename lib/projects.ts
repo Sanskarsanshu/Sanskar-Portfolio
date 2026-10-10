@@ -72,8 +72,8 @@ export const PROJECTS: Project[] = [
     highlights: ["nodedotjs", "typescript", "postgresql", "redis", "docker"],
     align: "left",
     section: "project1",
-    github: "#",
-    url: "#",
+    github: "https://github.com/Sanskarsanshu/CorePay",
+    url: "/404",
   },
   {
     num: "02",
@@ -194,8 +194,8 @@ export const PROJECTS: Project[] = [
     highlights: ["typescript", "react", "postgresql"],
     align: "right",
     section: "project2",
-    github: "#",
-    url: "#",
+    github: "https://github.com/Sanskarsanshu/VeriSync_Data_Collection",
+    url: "/404",
   },
   {
     num: "03",
@@ -236,8 +236,8 @@ export const PROJECTS: Project[] = [
     highlights: ["react", "nodedotjs"],
     align: "left",
     section: "project3",
-    github: "#",
-    url: "#",
+    github: "https://github.com/Sanskarsanshu/FeedMe-V2",
+    url: "/404",
   },
   {
     num: "04",
@@ -286,7 +286,125 @@ export const PROJECTS: Project[] = [
     highlights: ["fastapi", "python", "postgresql", "redis"],
     align: "right",
     section: "project4",
-    github: "#",
-    url: "#",
+    github: "https://github.com/Sanskarsanshu/careeros",
+    url: "/404",
   },
+];
+
+export const OTHER_PROJECTS: ProjectDetail[] = [
+  {
+    num: "05",
+    name: "Tracely AI",
+    stack: ["Next.js", "Python", "FastAPI", "OpenAI API"],
+    desc: "AI-powered log analysis and error tracing platform.",
+    details: "Built an intelligent log analysis and error tracing platform using AI to automatically diagnose and summarize application failures, helping developers resolve production issues faster.",
+    badge: "Open Source",
+    accent: "#4338ca",
+    logo: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+    media: [
+      {
+        id: "tr-1",
+        title: "AI Analysis",
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+        credit: "TRACELY AI · DIAGNOSTICS",
+        meta: ["LOGS", "TRACING"],
+        accent: "#4338ca",
+      }
+    ],
+    highlights: ["python", "react"],
+    github: "https://github.com/Sanskarsanshu/Tracely-AI",
+    url: "/404",
+  },
+  {
+    num: "06",
+    name: "Nexus Offline RAG",
+    stack: ["Python", "LangChain", "ChromaDB", "Local LLMs"],
+    desc: "Local, completely offline Retrieval-Augmented Generation system.",
+    details: "A privacy-first local RAG system designed to process sensitive documents offline without relying on cloud APIs, utilizing local embeddings and quantized open-source LLMs.",
+    badge: "Open Source",
+    accent: "#0e7490",
+    logo: "/journey/textures/gallery/nexusragprzod.webp",
+    media: [
+      {
+        id: "nx-1",
+        title: "Local RAG",
+        image: "/journey/textures/gallery/nexusragprzod.webp",
+        credit: "NEXUS · RAG PIPELINE",
+        meta: ["OFFLINE", "PRIVACY"],
+        accent: "#0e7490",
+      }
+    ],
+    highlights: ["python", "langchain"],
+    github: "https://github.com/Sanskarsanshu/nexus-offline-rag",
+    url: "/404",
+  },
+  {
+    num: "07",
+    name: "JeevanDrop",
+    stack: ["React Native", "Node.js", "MongoDB", "Socket.io"],
+    desc: "Real-time blood donation and request network.",
+    details: "A life-saving platform connecting blood donors with recipients in real-time using geolocation routing, smart matching algorithms, and instant push notifications.",
+    badge: "Social Impact",
+    accent: "#b91c1c",
+    logo: "/journey/textures/gallery/jeevandropprzod.webp",
+    media: [
+      {
+        id: "jd-1",
+        title: "Donation Network",
+        image: "/journey/textures/gallery/jeevandropprzod.webp",
+        credit: "JEEVANDROP · HEALTHCARE",
+        meta: ["REAL-TIME", "GEOLOCATION"],
+        accent: "#b91c1c",
+      }
+    ],
+    highlights: ["react", "nodedotjs"],
+    github: "https://github.com/Sanskarsanshu/JeevanDrop",
+    url: "/404",
+  },
+  {
+    num: "08",
+    name: "VisionTracker",
+    stack: ["Python", "OpenCV", "YOLOv8", "DeepSORT"],
+    desc: "Real-time object detection and multi-object tracking.",
+    details: "High-performance computer vision pipeline using YOLOv8 and DeepSORT for real-time bounding box prediction and multi-frame tracking in crowded environments.",
+    badge: "Computer Vision",
+    accent: "#1d4ed8",
+    logo: "/journey/textures/gallery/visiontrackerprzod.webp",
+    media: [
+      {
+        id: "vt-1",
+        title: "Object Tracking",
+        image: "/journey/textures/gallery/visiontrackerprzod.webp",
+        credit: "VISIONTRACKER · CV PIPELINE",
+        meta: ["YOLOv8", "DEEPSORT"],
+        accent: "#1d4ed8",
+      }
+    ],
+    highlights: ["python", "opencv"],
+    github: "https://github.com/Sanskarsanshu/AI-Powered-Real-time-object-detection-and-tracking-system",
+    url: "/404",
+  },
+  {
+    num: "09",
+    name: "Krishi Sakhi",
+    stack: ["React", "Django", "PostgreSQL", "Machine Learning"],
+    desc: "Agritech platform for crop disease detection and yield prediction.",
+    details: "Empowering farmers with AI-driven crop disease diagnostics from smartphone photos and localized weather-based yield forecasting to maximize agricultural output.",
+    badge: "Agritech",
+    accent: "#15803d",
+    logo: "/journey/textures/gallery/krishisakhiprzod.webp",
+    media: [
+      {
+        id: "ks-1",
+        title: "Crop Diagnostics",
+        image: "/journey/textures/gallery/krishisakhiprzod.webp",
+        credit: "KRISHI SAKHI · AI",
+        meta: ["AGRITECH", "ML"],
+        accent: "#15803d",
+      }
+    ],
+    highlights: ["react", "python"],
+    github: "https://github.com/Sanskarsanshu/Krishi-Sakhi",
+    url: "/404",
+  }
 ];

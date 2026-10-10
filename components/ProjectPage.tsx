@@ -5,10 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { HeroCarousel } from "@/components/ui/hero-carousel";
 import { useLenis } from "lenis/react";
 import { useLanguage } from "@/components/LanguageProvider";
-import type { Project } from "@/lib/projects";
+import type { ProjectDetail } from "@/lib/projects";
 
 type Props = {
-  project: Project | null;
+  project: ProjectDetail | null;
   onBack: () => void;
 };
 

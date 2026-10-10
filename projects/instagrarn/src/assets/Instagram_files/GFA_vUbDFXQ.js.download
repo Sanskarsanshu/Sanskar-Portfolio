@@ -1,0 +1,3 @@
+;/*FB_PKG_DELIM*/
+
+__d("CAAFBAccountSearchFormBodyText.react",["CAAFBAccountSearchFormBodyText_content.graphql","CometRelay","CometRow.react","CometRowItem.react","XMDSText.react","react"],(function(t,n,r,o,a,i,l){"use strict";var e,s,u=s||(s=o("react"));function c(t){var a=t.content$key,i=o("CometRelay").useFragment(e!==void 0?e:e=n("CAAFBAccountSearchFormBodyText_content.graphql"),a);return u.jsx(r("CometRow.react"),{paddingHorizontal:0,children:u.jsx(r("CometRowItem.react"),{children:u.jsx(r("XMDSText.react"),{textStyle:"body",children:i.account_search_body})})})}c.displayName=c.name+" [from "+i.id+"]",l.default=c}),98);
