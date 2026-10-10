@@ -16,9 +16,9 @@ export async function GET() {
     // Read files in the directory
     const files = fs.readdirSync(backgroundsDir);
     
-    // Filter out only image files and map them to their public paths
+    // Filter out only image/video files and map them to their public paths
     const images = files
-      .filter(file => /\.(png|jpe?g|webp|gif)$/i.test(file))
+      .filter(file => /\.(png|jpe?g|webp|gif|mp4)$/i.test(file))
       .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }))
       .map(file => `/Backgrounds/${file}`);
 

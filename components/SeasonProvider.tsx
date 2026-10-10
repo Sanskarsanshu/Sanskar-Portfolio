@@ -80,7 +80,7 @@ export default function SeasonProvider({ children }: { children: ReactNode }) {
       palette.keyboardBase = "#050505";
     } else if (galleryImage.includes("Back25")) {
       palette.keyboardBase = "#46515E";
-    } else if (galleryImage.includes("Back24")) {
+    } else if (galleryImage.includes("Back24") || galleryImage.includes("Back0")) {
       palette.keyboardBase = "#3A2A1B";
       palette.keyboardMetalness = 0.85;
       palette.keyboardRoughness = 0.35;

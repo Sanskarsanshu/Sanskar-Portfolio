@@ -58,15 +58,26 @@ export function SlideshowBackground() {
           transition={{ duration: 1.5, ease: "easeInOut" }}
           className="absolute inset-0 w-full h-full"
         >
-          <Image
-            src={images[currentIndex]}
-            alt={`Background slideshow ${currentIndex + 1}`}
-            fill
-            sizes="100vw"
-            quality={90}
-            priority
-            style={{ objectFit: "cover" }}
-          />
+          {images[currentIndex]?.endsWith(".mp4") ? (
+            <video
+              src={images[currentIndex]}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="object-cover w-full h-full"
+            />
+          ) : (
+            <Image
+              src={images[currentIndex]}
+              alt={`Background slideshow ${currentIndex + 1}`}
+              fill
+              sizes="100vw"
+              quality={90}
+              priority
+              style={{ objectFit: "cover" }}
+            />
+          )}
         </motion.div>
       </AnimatePresence>
       
